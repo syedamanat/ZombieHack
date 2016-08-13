@@ -38,6 +38,9 @@ end
 
 local listener=function(event)
         if media.hasSource(media.Camera)then
+        	local player = display.newImage("player.png")
+    player.x = 160
+    player.y = 300
         	  media.capturePhoto({listener=sessionComplete})
         else
         	  native.showAlert("Corona","Camera Not Found")
