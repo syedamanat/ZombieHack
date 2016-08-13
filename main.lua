@@ -5,23 +5,24 @@
 -----------------------------------------------------------------------------------------
 
 -- Your code here
-local centerX=display.contentCenterX
-local centerY=display.contentCenterY
+local mainTable = {}
+mainTable.centerX=display.contentCenterX
+mainTable.centerY=display.contentCenterY
 
-local _W=display.contentWidth
-local _H=display.contentHeight
+mainTable._W=display.contentWidth
+mainTable._H=display.contentHeight
 
-local isXcodeSimulator="iPhone Simulator"==system.getInfo("model")
-if(isXcodeSimulator)then
+mainTable.isXcodeSimulator="iPhone Simulator"==system.getInfo("model")
+if(mainTable.isXcodeSimulator)then
 	local alert=native.showAlert("Information","Camera API not available on IOS Simulator",{"OK"})
 end
 
-local background=display.newRect(centerX,centerY, _W, _H)
-background:setFillColor(0,5,0,0)
+mainTable.background=display.newRect(centerX,centerY, _W, _H)
+mainTable.background:setFillColor(0,5,0,0)
 
-local text=display.newText("Tap anywhere to launch camera",centerX,centerY,nil,16)
+mainTable.text=display.newText("Tap anywhere to launch camera",centerX,centerY,nil,16)
 
-local sessionComplete=function(event)
+mainTable.sessionComplete=function(event)
 	local image=event.target
 	print("camera",(image and "returned an image")or "Session was cancelled")
 	print("event name:"..event.name)
@@ -36,7 +37,7 @@ local sessionComplete=function(event)
 	end
 end
 
-local listener=function(event)
+mainTable.listener=function(event)
         if media.hasSource(media.Camera)then
         	local player = display.newImage("player.png")
     player.x = 160
@@ -47,4 +48,5 @@ local listener=function(event)
         end
         return true
 end
-background:addEventListener("tap",listener)
+mainTable.background:addEventListener("tap",listener)
+return mainTable
