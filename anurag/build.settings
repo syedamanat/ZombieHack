@@ -13,7 +13,7 @@ settings =
 		default = "portrait",
 		supported = { "portrait", },
 	},
-
+	
 	excludeFiles =
 	{
 		-- Include only the necessary icon files on each platform
@@ -31,6 +31,7 @@ settings =
 			UIStatusBarHidden = false,
 			UIPrerenderedIcon = true, -- set to false for "shine" overlay
 			--UIApplicationExitsOnSuspend = true, -- uncomment to quit app on suspend
+			NSLocationWhenInUseUsageDescription = "This app uses maps.",
 
 			CFBundleIconFiles =
 			{
@@ -54,7 +55,7 @@ settings =
 			},
 		},
 	},
-
+	
 	--
 	-- Android Section
 	--
@@ -62,13 +63,15 @@ settings =
 	{
 		usesPermissions =
 		{
-		"android.permission.INTERNET",
-
-            --optional permission used to display current location via the GPS
+			"android.permission.INTERNET",
             "android.permission.ACCESS_FINE_LOCATION",
-
-            --optional permission used to display current location via WiFi or cellular service
             "android.permission.ACCESS_COARSE_LOCATION",
 		},
+		usesFeatures =
+        {
+            { name = "android.hardware.location", required = false },
+            { name = "android.hardware.location.gps", required = false },
+            { name = "android.hardware.location.network", required = false }
+        },
 	},
 }
